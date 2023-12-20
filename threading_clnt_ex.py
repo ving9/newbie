@@ -5,7 +5,8 @@ class ThreadClnt:
     def __init__(self, ip, port):
         servaddr = (ip, port)
         self.clntsock = socket(AF_INET, SOCK_STREAM)
-        self.clntsock.connect(servaddr)
+        abc = self.clntsock.connect(servaddr)
+        print(abc)
         self.writeThread()
         self.readThread()
 

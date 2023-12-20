@@ -23,44 +23,9 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
-   <widget class="QWidget" name="page">
-    <widget class="QLineEdit" name="line_ip">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>200</y>
-       <width>381</width>
-       <height>61</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="line_port">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>280</y>
-       <width>381</width>
-       <height>61</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btn_addr_input">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>390</y>
-       <width>121</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QWidget" name="page_1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="geometry">
       <rect>
@@ -71,7 +36,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_01">
       <property name="enabled">
@@ -90,14 +55,14 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>20</y>
+         <y>30</y>
          <width>981</width>
          <height>561</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="4">
-         <widget class="QPushButton" name="btn_gwang_3">
+         <widget class="QPushButton" name="btn_gwang_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -115,27 +80,8 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="btn_gangwon_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>강원도</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="2">
-         <widget class="QPushButton" name="btn_daegu_3">
+         <widget class="QPushButton" name="btn_daegu_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -154,7 +100,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="btn_jeonju_3">
+         <widget class="QPushButton" name="btn_jeonju_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -172,27 +118,8 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="btn_sejong_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>세종</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="btn_daejeon_3">
+         <widget class="QPushButton" name="btn_daejeon_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -211,7 +138,7 @@
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QPushButton" name="btn_jeju_3">
+         <widget class="QPushButton" name="btn_jeju_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -230,7 +157,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="btn_gyungki_3">
+         <widget class="QPushButton" name="btn_gyungki_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -249,7 +176,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="btn_seoul_4">
+         <widget class="QPushButton" name="btn_seoul_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -268,7 +195,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QPushButton" name="btn_choogbuk_3">
+         <widget class="QPushButton" name="btn_choogbuk_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -287,7 +214,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="btn_busan_3">
+         <widget class="QPushButton" name="btn_busan_2013">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -302,6 +229,25 @@
           </property>
           <property name="text">
            <string>부산(울산,경남)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="btn_gangwon_2013">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>강원도</string>
           </property>
          </widget>
         </item>
@@ -323,7 +269,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="4">
-         <widget class="QPushButton" name="btn_gwang_2">
+         <widget class="QPushButton" name="btn_gwang_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -341,27 +287,8 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="btn_gangwon_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>강원도</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="2">
-         <widget class="QPushButton" name="btn_daegu_2">
+         <widget class="QPushButton" name="btn_daegu_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -380,7 +307,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="btn_jeonju_2">
+         <widget class="QPushButton" name="btn_jeonju_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -398,27 +325,8 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="btn_sejong_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>세종</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="btn_daejeon_2">
+         <widget class="QPushButton" name="btn_daejeon_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -437,7 +345,7 @@
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QPushButton" name="btn_jeju_2">
+         <widget class="QPushButton" name="btn_jeju_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -456,7 +364,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="btn_gyungki_2">
+         <widget class="QPushButton" name="btn_gyungki_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -475,7 +383,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="btn_seoul_3">
+         <widget class="QPushButton" name="btn_seoul_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -494,7 +402,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QPushButton" name="btn_choogbuk_2">
+         <widget class="QPushButton" name="btn_choogbuk_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -513,7 +421,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="btn_busan_2">
+         <widget class="QPushButton" name="btn_busan_2014">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -528,6 +436,25 @@
           </property>
           <property name="text">
            <string>부산(울산,경남)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="btn_gangwon_2014">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>강원도</string>
           </property>
          </widget>
         </item>
@@ -538,7 +465,7 @@
       <attribute name="title">
        <string>2022</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>30</x>
@@ -549,7 +476,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="4">
-         <widget class="QPushButton" name="btn_gwang">
+         <widget class="QPushButton" name="btn_gwang_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -568,7 +495,7 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="btn_gangwon">
+         <widget class="QPushButton" name="btn_gangwon_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -587,7 +514,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QPushButton" name="btn_daegu">
+         <widget class="QPushButton" name="btn_daegu_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -606,7 +533,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="btn_jeonju">
+         <widget class="QPushButton" name="btn_jeonju_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -625,7 +552,7 @@
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QPushButton" name="btn_sejong">
+         <widget class="QPushButton" name="btn_sejong_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -644,7 +571,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="btn_daejeon">
+         <widget class="QPushButton" name="btn_daejeon_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -663,7 +590,7 @@
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QPushButton" name="btn_jeju">
+         <widget class="QPushButton" name="btn_jeju_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -682,7 +609,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="btn_gyungki">
+         <widget class="QPushButton" name="btn_gyungki_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -701,7 +628,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="btn_seoul">
+         <widget class="QPushButton" name="btn_seoul_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -720,7 +647,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QPushButton" name="btn_choogbuk">
+         <widget class="QPushButton" name="btn_choogbuk_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -739,7 +666,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="btn_busan">
+         <widget class="QPushButton" name="btn_busan_2022">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -761,21 +688,214 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="btn_prepage">
+    <widget class="QPushButton" name="btn_1">
      <property name="geometry">
       <rect>
-       <x>510</x>
+       <x>590</x>
        <y>10</y>
-       <width>89</width>
-       <height>25</height>
+       <width>101</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>pre page</string>
+      <string>PushButton</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_5"/>
+   <widget class="QWidget" name="page_2">
+    <widget class="QComboBox" name="combo_product">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>160</y>
+       <width>191</width>
+       <height>51</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_inquiry">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>230</y>
+       <width>131</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>조회</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_graph">
+     <property name="geometry">
+      <rect>
+       <x>830</x>
+       <y>540</y>
+       <width>171</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>가격추이 그래프 보기</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_year">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>40</y>
+       <width>200</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>30</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_region">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>40</y>
+       <width>200</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>30</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>110</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>상품선택</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="table_product_price">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>120</y>
+       <width>591</width>
+       <height>501</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>날짜</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>가격</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="btn_2">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>30</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_3">
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>70</y>
+       <width>781</width>
+       <height>521</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
