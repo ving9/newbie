@@ -1,6 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 from socket import *
 from threading import *
 from PyQt5.QtWidgets import *
@@ -16,10 +17,10 @@ class WindowClass(QWidget) :
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.clnt_sock = socket(AF_INET, SOCK_STREAM)
-        # ip = '127.0.0.1'
-        # port = 9500
-        ip = '10.10.20.103'
-        port = 8889
+        ip = '127.0.0.1'
+        port = 8998
+        # ip = '10.10.20.103'
+        # port = 8889
         self.clnt_sock.connect((ip, port))
         self.totalArray = []
         self.productArray = []
@@ -27,30 +28,31 @@ class WindowClass(QWidget) :
         self.dateArray = []
 
 
+        self.btn_test.clicked.connect(self.move)
 
 
-        self.fig = plt.Figure()
-        self.canvas = FigureCanvas(self.fig)
-        self.verticalLayout.addWidget(self.canvas)
-
-        x = np.arange(1, 12, 1)
-        y = np.sin(x)
-
-        ax = self.fig.add_subplot(111)
-        ax.plot(x, y)
-        ax.set_xlabel("month")
-        ax.set_ylabel("price")
-
-        ax.set_title("my sin graph")
-        ax.legend()
-        self.canvas.draw()
+        # self.fig = plt.Figure()
+        # self.canvas = FigureCanvas(self.fig)
+        # self.verticalLayout.addWidget(self.canvas)
+        #
+        # x = np.arange(1, 12, 1)
+        # y = np.sin(x)
+        #
+        # ax = self.fig.add_subplot(111)
+        # ax.plot(x, y)
+        # ax.set_xlabel("month")
+        # ax.set_ylabel("price")
+        #
+        # ax.set_title("my sin graph")
+        # ax.legend()
+        # self.canvas.draw()
 
 
 
 
         # self.combo_product.activated.connect(self.send_product)
         self.btn_inquiry.clicked.connect(self.inquiry_price)
-        self.btn_seoul_2013.clicked.connect(lambda: self.send_year_region("2013", "서울"))
+        self.btn_seoul_2013.clicked.connect(lambda: self.send_year_region("2013", "서울", 'a'))
 
 
         self.table_product_price.horizontalHeader().setVisible(True)  # 버그로 인해 디자이너에서 만져도 안보여서 추가한 코드
@@ -60,71 +62,44 @@ class WindowClass(QWidget) :
         self.btn_1.clicked.connect(self.move2)
         self.btn_2.clicked.connect(self.move3)
 
+
+    def move(self):
+        self.stackedWidget.setCurrentIndex(0)
     def move2(self):
         self.stackedWidget.setCurrentIndex(1)
 
     def move3(self):
         self.stackedWidget.setCurrentIndex(2)
 
-    def send_year_region(self, year, regi):
+    def send_year_region(self, year, regi, idx):
         self.label_year.setText(year)
         self.label_region.setText(regi)
-        a = bytes(year.encode('utf-8'))
-        b = bytes(regi.encode('utf-8'))
-        # self.clnt_sock.send(a+b)
+        self.clnt_sock.send(bytes(idx.encode()))
         self.stackedWidget.setCurrentIndex(1)
         self.recv_data()
 
     def recv_data(self):
-        # temp_ = ""
-        # while True:
-        #     temp = self.clnt_sock.recv(1024)
-        #     if not temp:
-        #         # temp.decode('utf-8')
-        #         # temp_ += temp
-        #         break
-        #     else:
-        #         temp = temp.decode('utf-8')
-        #         temp_ += temp
-        # try:
-        #     temp = self.clnt_sock.recv(1000)
-        #     while temp:
-        #         temp_ = temp.decode()
-        #         temp = self.clnt_sock.recv(1000)
-        # except IOError as e:
-        #     pass
-        # _temp = ""
-        # while True:
-        #     self.clnt_sock.settimeout(2)
-        #     try:
-        #         temp = self.clnt_sock.recv(1024)
-        #         if not temp:
-        #             break
-        #     except timeout:
-        #         break
-        #     else:
-        #         temp = temp.decode('utf-8')
-        #         _temp += temp
-        _temp = ""
-        temp = self.clnt_sock.recv(500000)
-        temp = temp.decode('utf-8')
-        _temp += temp
-        self.totalArray = _temp.split(',')
-        print(self.totalArray)
+        # temp = self.clnt_sock.recv(4096)
+        # temp = temp.decode('utf-8')
+        # self.totalArray = temp.split(',')
+        self.listen_thread()
+        time.sleep(2)
         self.totalArray.pop()
+        print(self.totalArray)
         for i in range(0, int((len(self.totalArray) / 3))):
             self.dateArray.append(self.totalArray[i*3])
             self.productArray.append(self.totalArray[i*3+1])
             self.priceArray.append(self.totalArray[i*3+2])
         for i in range(0, len(self.priceArray)):
             self.priceArray[i] = self.priceArray[i].strip("\n")
+        for i in range(0, len(self.dateArray)):
+            self.dateArray[i] = self.dateArray[i].strip("\n")
         product = []
         for i in range(0, len(self.productArray)):
             if self.productArray[i] not in product:
                 product.append(self.productArray[i])
         for i in range(0, len(product)):
             self.combo_product.addItem(product[i])
-        print(self.totalArray)
 
     # def send_product(self):
     #     sig = '1'
@@ -151,12 +126,34 @@ class WindowClass(QWidget) :
             if self.productArray[i] == curPro:
                 datearr.append(self.dateArray[i])
                 pricearr.append(self.priceArray[i])
+        intprice = list(map(int, pricearr))
+        self.line_min.setText(str(min(intprice)) + "원")
+        self.line_max.setText(str(max(intprice)) + "원")
+        self.line_aver.setText(str(int((sum(intprice)/len(pricearr)))) + "원")
         self.table_product_price.setRowCount(len(datearr))
-        print(datearr)
-        print(pricearr)
         for i in range(0, len(datearr)):
             self.table_product_price.setItem(i, 0, QTableWidgetItem(datearr[i]))
-            self.table_product_price.setItem(i, 1, QTableWidgetItem(pricearr[i]))
+            self.table_product_price.setItem(i, 1, QTableWidgetItem(pricearr[i]+"원"))
+
+    def listen_thread(self):
+        # 데이터 수신 쓰레드 생성 시작
+        t = Thread(target=self.receive_message, args=(self.clnt_sock,))
+        t.start()
+
+    def receive_message(self, cs):
+        temp = bytes()
+        while True:
+            try:
+                buf = cs.recv(4096)
+                temp += buf
+                if not buf:
+                    break
+            except:
+                temp += buf
+        temp = temp.decode()
+        temp = temp.split(',')
+        self.totalArray = temp
+
 
 
 

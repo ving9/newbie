@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_1">
     <widget class="QTabWidget" name="tabWidget">
@@ -706,8 +706,8 @@
     <widget class="QComboBox" name="combo_product">
      <property name="geometry">
       <rect>
-       <x>820</x>
-       <y>160</y>
+       <x>630</x>
+       <y>190</y>
        <width>191</width>
        <height>51</height>
       </rect>
@@ -716,8 +716,8 @@
     <widget class="QPushButton" name="btn_inquiry">
      <property name="geometry">
       <rect>
-       <x>850</x>
-       <y>230</y>
+       <x>870</x>
+       <y>180</y>
        <width>131</width>
        <height>81</height>
       </rect>
@@ -729,8 +729,8 @@
     <widget class="QPushButton" name="btn_graph">
      <property name="geometry">
       <rect>
-       <x>830</x>
-       <y>540</y>
+       <x>890</x>
+       <y>600</y>
        <width>171</width>
        <height>61</height>
       </rect>
@@ -742,7 +742,7 @@
     <widget class="QLabel" name="label_year">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>60</x>
        <y>40</y>
        <width>200</width>
        <height>60</height>
@@ -778,7 +778,7 @@
     <widget class="QLabel" name="label_region">
      <property name="geometry">
       <rect>
-       <x>340</x>
+       <x>280</x>
        <y>40</y>
        <width>200</width>
        <height>60</height>
@@ -814,8 +814,8 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>850</x>
-       <y>110</y>
+       <x>660</x>
+       <y>140</y>
        <width>121</width>
        <height>41</height>
       </rect>
@@ -835,16 +835,19 @@
     <widget class="QTableWidget" name="table_product_price">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>40</x>
        <y>120</y>
-       <width>591</width>
+       <width>511</width>
        <height>501</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>16</pointsize>
+       <pointsize>14</pointsize>
       </font>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>true</bool>
@@ -872,10 +875,143 @@
     <widget class="QPushButton" name="btn_2">
      <property name="geometry">
       <rect>
-       <x>760</x>
+       <x>900</x>
        <y>30</y>
        <width>101</width>
        <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_min">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>390</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>최소가</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_max">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>450</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>최대가</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_aver">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>510</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>평균가</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="line_min">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>390</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="line_max">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>450</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="line_aver">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>510</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_test">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>50</y>
+       <width>89</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">

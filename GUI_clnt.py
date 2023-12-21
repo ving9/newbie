@@ -9,7 +9,6 @@ def calculate():
     temp = float(entry1.get())  # 섭씨온도를 읽는다
     sock.send(str(temp).encode())  # 섭씨온도 서버로 전송
 
-
 # 쓰레드 핸들러
 def handler(sock) :
     while True:
