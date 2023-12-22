@@ -16,40 +16,27 @@ class WindowClass(QWidget) :
         uic.loadUi('farm.ui', self)
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
-        self.clnt_sock = socket(AF_INET, SOCK_STREAM)
-        ip = '127.0.0.1'
-        port = 8998
-        # ip = '10.10.20.103'
-        # port = 8889
-        self.clnt_sock.connect((ip, port))
+        self.ip = '127.0.0.1'
+        self.port = 8889
+        # self.ip = '10.10.20.103'
+        # self.port = 8889
+
         self.totalArray = []
         self.productArray = []
         self.priceArray = []
         self.dateArray = []
-
-
-        self.btn_test.clicked.connect(self.move)
-
-
-        # self.fig = plt.Figure()
-        # self.canvas = FigureCanvas(self.fig)
-        # self.verticalLayout.addWidget(self.canvas)
-        #
-        # x = np.arange(1, 12, 1)
-        # y = np.sin(x)
-        #
-        # ax = self.fig.add_subplot(111)
-        # ax.plot(x, y)
-        # ax.set_xlabel("month")
-        # ax.set_ylabel("price")
-        #
-        # ax.set_title("my sin graph")
-        # ax.legend()
-        # self.canvas.draw()
+        self.grape_date_arr = []
+        self.grape_price_arr = []
 
 
 
 
+
+
+        self.btn_graph.setDisabled(True)
+
+
+        self.btn_connect.clicked.connect(self.connect_serv)
         # self.combo_product.activated.connect(self.send_product)
         self.btn_inquiry.clicked.connect(self.inquiry_price)
         self.btn_seoul_2013.clicked.connect(lambda: self.send_year_region("2013", "서울", 'a'))
@@ -91,41 +78,48 @@ class WindowClass(QWidget) :
         self.table_product_price.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.table_product_price.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
 
+        self.btn_test.clicked.connect(self.move)
         self.btn_1.clicked.connect(self.move2)
         self.btn_2.clicked.connect(self.move3)
+        self.btn_graph.clicked.connect(self.draw_grape)
+        self.btn_exit.clicked.connect(self.go_home)
 
-
+    def connect_serv(self):
+        self.clnt_sock = socket(AF_INET, SOCK_STREAM)
+        self.clnt_sock.connect((self.ip, self.port))
+        # self.clnt_sock.send(bytes('Z'.encode()))
+        self.stackedWidget.setCurrentIndex(1)
     def move(self):
         self.stackedWidget.setCurrentIndex(0)
     def move2(self):
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
 
     def move3(self):
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
 
     def send_year_region(self, year, regi, idx):
         self.label_year.setText(year)
+        self.label_year_2.setText(year)
         self.label_region.setText(regi)
+        self.label_region_2.setText(regi)
         self.clnt_sock.send(bytes(idx.encode()))
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         self.recv_data()
 
     def recv_data(self):
-        # temp = self.clnt_sock.recv(4096)
-        # temp = temp.decode('utf-8')
-        # self.totalArray = temp.split(',')
         self.listen_thread()
-        time.sleep(2)
+        time.sleep(1.5)
+        self.totalArray.pop()
         self.totalArray.pop()
         print(self.totalArray)
         for i in range(0, int((len(self.totalArray) / 3))):
             self.dateArray.append(self.totalArray[i*3])
             self.productArray.append(self.totalArray[i*3+1])
             self.priceArray.append(self.totalArray[i*3+2])
-        for i in range(0, len(self.priceArray)):
-            self.priceArray[i] = self.priceArray[i].strip("\n")
-        for i in range(0, len(self.dateArray)):
-            self.dateArray[i] = self.dateArray[i].strip("\n")
+        # for i in range(0, len(self.priceArray)):
+        #     self.priceArray[i] = self.priceArray[i].strip("\n")
+        # for i in range(0, len(self.dateArray)):
+        #     self.dateArray[i] = self.dateArray[i].strip("\n")
         product = []
         for i in range(0, len(self.productArray)):
             if self.productArray[i] not in product:
@@ -133,31 +127,19 @@ class WindowClass(QWidget) :
         for i in range(0, len(product)):
             self.combo_product.addItem(product[i])
 
-    # def send_product(self):
-    #     sig = '1'
-    #     sig = bytes(sig.encode('utf-8'))
-    #     self.clnt_sock.send(sig)
-    #     self.recv_price()
-    #
-    # def recv_price(self):
-    #     temp = self.clnt_sock.recv(1024)
-    #     temp = temp.decode('utf-8')
-    #     self.priceArray = temp.split(',')
-        # producarr = []
-        # pricearr = []
-        # for i in range(0, len(self.productArray)):
-        #     if self.productArray[i] == curPro:
-        #         producarr.append(self.productArray[i])
-        #         pricearr.append(self.priceArray[i])
+
 
     def inquiry_price(self):
         curPro = self.combo_product.currentText()
+        self.label_product_2.setText(curPro)
         datearr = []
         pricearr = []
         for i in range(0, len(self.productArray)):
             if self.productArray[i] == curPro:
                 datearr.append(self.dateArray[i])
                 pricearr.append(self.priceArray[i])
+        self.grape_date_arr = datearr
+        self.grape_price_arr = pricearr
         intprice = list(map(int, pricearr))
         self.line_min.setText(str(min(intprice)) + "원")
         self.line_max.setText(str(max(intprice)) + "원")
@@ -166,6 +148,9 @@ class WindowClass(QWidget) :
         for i in range(0, len(datearr)):
             self.table_product_price.setItem(i, 0, QTableWidgetItem(datearr[i]))
             self.table_product_price.setItem(i, 1, QTableWidgetItem(pricearr[i]+"원"))
+        self.btn_graph.setEnabled(True)
+
+
 
     def listen_thread(self):
         # 데이터 수신 쓰레드 생성 시작
@@ -185,34 +170,77 @@ class WindowClass(QWidget) :
         temp = temp.decode()
         temp = temp.split(',')
         self.totalArray = temp
+        # self.clnt_sock.close()
+
+    def draw_grape(self):
+        temp = [[],[],[],[],[],[],[],[],[],[],[],[]]
+        result = []
+        month_list = []
+        if self.label_year_2.text() == "2013":
+            for i in range(0, len(self.grape_date_arr)):
+                if "201301" in self.grape_date_arr[i]:
+                    temp[0].append(self.grape_price_arr[i])
+                elif "201302" in self.grape_date_arr[i]:
+                    temp[1].append(self.grape_price_arr[i])
+                elif "201303" in self.grape_date_arr[i]:
+                    temp[2].append(self.grape_price_arr[i])
+                elif "201304" in self.grape_date_arr[i]:
+                    temp[3].append(self.grape_price_arr[i])
+                elif "201305" in self.grape_date_arr[i]:
+                    temp[4].append(self.grape_price_arr[i])
+                elif "201306" in self.grape_date_arr[i]:
+                    temp[5].append(self.grape_price_arr[i])
+                elif "201307" in self.grape_date_arr[i]:
+                    temp[6].append(self.grape_price_arr[i])
+                elif "201308" in self.grape_date_arr[i]:
+                    temp[7].append(self.grape_price_arr[i])
+                elif "201309" in self.grape_date_arr[i]:
+                    temp[8].append(self.grape_price_arr[i])
+                elif "201310" in self.grape_date_arr[i]:
+                    temp[9].append(self.grape_price_arr[i])
+                elif "201311" in self.grape_date_arr[i]:
+                    temp[10].append(self.grape_price_arr[i])
+                elif "201312" in self.grape_date_arr[i]:
+                    temp[11].append(self.grape_price_arr[i])
+            for i in range(0, 12):
+                if temp[i]:
+                    sumprice = list(map(int, temp[i]))
+                    result.append(int((sum(sumprice)/len(sumprice))))
+                    month_list.append(i+1)
+        #
+        # elif self.label_year_2.text() == "2014":
+        #     print('성공')
+        # else
 
 
 
+        # self.grape_date_arr
+        # self.grape_price_arr
+        self.fig = plt.Figure()
+        self.canvas = FigureCanvas(self.fig)
+        self.verticalLayout.addWidget(self.canvas)
 
-    # def recv_date(self):
-    #     curPro = self.combo_product.currentText()
-    #     temp = self.clnt_sock.recv(1024)
-    #     temp = temp.decode('utf-8')
-    #     self.dateArray = temp.split(',')
-    #     datearr = []
-    #     pricearr = []
-    #     for i in range(0, len(self.productArray)):
-    #         if self.productArray[i] == curPro:
-    #             datearr.append(self.dateArray[i])
-    #             pricearr.append(self.priceArray[i])
-    #     self.table_product_price.setRowCount(len(datearr))
-    #     print(datearr)
-    #     print(pricearr)
-    #     for i in range(0, len(datearr)):
-    #         self.table_product_price.setItem(i, 0, QTableWidgetItem(datearr[i]))
-    #         self.table_product_price.setItem(i, 1, QTableWidgetItem(pricearr[i]))
+        x = month_list
+        y = result
 
+        ax = self.fig.add_subplot(111)
+        ax.plot(x, y)
+        ax.set_xlabel("month")
+        ax.set_ylabel("price")
 
+        # ax.set_title("my sin graph")
+        # ax.legend()
+        self.canvas.draw()
+        self.stackedWidget.setCurrentIndex(3)
 
-
-
-
-
+    def go_home(self):
+        self.canvas.close()
+        self.totalArray = []
+        self.productArray = []
+        self.priceArray = []
+        self.dateArray = []
+        self.table_product_price.setRowCount(0)
+        self.stackedWidget.setCurrentIndex(0)
 
 
 
