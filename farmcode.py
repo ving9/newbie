@@ -16,29 +16,29 @@ class WindowClass(QWidget) :
         uic.loadUi('farm.ui', self)
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
-        self.ip = '127.0.0.1'
+        self.ip = '127.0.0.1'     # 고정적으로 접속할 IP와 PORT
         self.port = 8889
-        # self.ip = '10.10.20.103'
-        # self.port = 8889
 
-        self.totalArray = []
-        self.productArray = []
-        self.priceArray = []
-        self.dateArray = []
-        self.grape_date_arr = []
-        self.grape_price_arr = []
-
-
-
-
-
+        self.totalArray = []       # 받은 데이터 전체 저장
+        self.productArray = []     # 받은 데이터 분리해서 상품명만 저장
+        self.priceArray = []       # 받은 데이터 분리해서 가격만 저장
+        self.dateArray = []        # 받은 데이터 분리해서 날짜만 저장
+        self.grape_date_arr = []   # 사용자가 선택하고 난 후의 그래프를 그리기 위한 날짜 리스트
+        self.grape_price_arr = []  # 그래프 그리기 위한 가격 리스트
 
         self.btn_graph.setDisabled(True)
+        # 상품을 조회하기 전까지 그래프 화면으로 넘어가는 것을 막기 위함
 
+        self.table_product_price.horizontalHeader().setVisible(True)
+        self.table_product_price.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.table_product_price.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
+        # 헤더 사이즈 조절
 
-        self.btn_connect.clicked.connect(self.connect_serv)
-        # self.combo_product.activated.connect(self.send_product)
-        self.btn_inquiry.clicked.connect(self.inquiry_price)
+        self.btn_graph.clicked.connect(self.draw_grape) # 그래프로 넘어가는 버튼
+        self.btn_exit.clicked.connect(self.go_home)  # 메인 화면으로 돌아가는 버튼
+        self.btn_connect.clicked.connect(self.connect_serv) # 메인화면에서 서버와 접속 시도하는 버튼
+        self.btn_inquiry.clicked.connect(self.inquiry_price) # 상품 목록에서 상품을 골라 가격을 조회하는 버튼
+
         self.btn_seoul_2013.clicked.connect(lambda: self.send_year_region("2013", "서울", 'a'))
         self.btn_gyungki_2013.clicked.connect(lambda: self.send_year_region("2013", "경기", 'b'))
         self.btn_daegu_2013.clicked.connect(lambda: self.send_year_region("2013", "대구(경북)", 'c'))
@@ -74,30 +74,14 @@ class WindowClass(QWidget) :
         self.btn_sejong_2022.clicked.connect(lambda: self.send_year_region("2022", "세종", 'K'))
 
 
-        self.table_product_price.horizontalHeader().setVisible(True)  # 버그로 인해 디자이너에서 만져도 안보여서 추가한 코드
-        self.table_product_price.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
-        self.table_product_price.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
 
-        self.btn_test.clicked.connect(self.move)
-        self.btn_1.clicked.connect(self.move2)
-        self.btn_2.clicked.connect(self.move3)
-        self.btn_graph.clicked.connect(self.draw_grape)
-        self.btn_exit.clicked.connect(self.go_home)
 
-    def connect_serv(self):
+    def connect_serv(self): # 서버와 접속하는 함수
         self.clnt_sock = socket(AF_INET, SOCK_STREAM)
         self.clnt_sock.connect((self.ip, self.port))
-        # self.clnt_sock.send(bytes('Z'.encode()))
         self.stackedWidget.setCurrentIndex(1)
-    def move(self):
-        self.stackedWidget.setCurrentIndex(0)
-    def move2(self):
-        self.stackedWidget.setCurrentIndex(2)
 
-    def move3(self):
-        self.stackedWidget.setCurrentIndex(3)
-
-    def send_year_region(self, year, regi, idx):
+    def send_year_region(self, year, regi, idx):  # 서버에 어떤 년도, 어떤 지역인지 보내는 함수
         self.label_year.setText(year)
         self.label_year_2.setText(year)
         self.label_region.setText(regi)
@@ -106,8 +90,8 @@ class WindowClass(QWidget) :
         self.stackedWidget.setCurrentIndex(2)
         self.recv_data()
 
-    def recv_data(self):
-        self.listen_thread()
+    def recv_data(self):  # 서버에서 데이터를 받아오고 상품명 목록에 출력하기 위한 함수
+        self.listen_thread()  # 데이터를 받을때 작동시킬 쓰레드
         time.sleep(1.5)
         self.totalArray.pop()
         self.totalArray.pop()
@@ -116,10 +100,6 @@ class WindowClass(QWidget) :
             self.dateArray.append(self.totalArray[i*3])
             self.productArray.append(self.totalArray[i*3+1])
             self.priceArray.append(self.totalArray[i*3+2])
-        # for i in range(0, len(self.priceArray)):
-        #     self.priceArray[i] = self.priceArray[i].strip("\n")
-        # for i in range(0, len(self.dateArray)):
-        #     self.dateArray[i] = self.dateArray[i].strip("\n")
         product = []
         for i in range(0, len(self.productArray)):
             if self.productArray[i] not in product:
@@ -129,7 +109,7 @@ class WindowClass(QWidget) :
 
 
 
-    def inquiry_price(self):
+    def inquiry_price(self):  # 상품명 목록에서 상품을 골라 조회하는 버튼
         curPro = self.combo_product.currentText()
         self.label_product_2.setText(curPro)
         datearr = []
@@ -150,14 +130,11 @@ class WindowClass(QWidget) :
             self.table_product_price.setItem(i, 1, QTableWidgetItem(pricearr[i]+"원"))
         self.btn_graph.setEnabled(True)
 
-
-
-    def listen_thread(self):
-        # 데이터 수신 쓰레드 생성 시작
+    def listen_thread(self): # 데이터 수신 쓰레드 생성 시작
         t = Thread(target=self.receive_message, args=(self.clnt_sock,))
         t.start()
 
-    def receive_message(self, cs):
+    def receive_message(self, cs):  # 서버로부터 데이터를 수신하고 메인 리스트에 저장
         temp = bytes()
         while True:
             try:
@@ -170,12 +147,12 @@ class WindowClass(QWidget) :
         temp = temp.decode()
         temp = temp.split(',')
         self.totalArray = temp
-        # self.clnt_sock.close()
 
-    def draw_grape(self):
+    def draw_grape(self):  # 그래프를 그리기 위한 함수
         temp = [[],[],[],[],[],[],[],[],[],[],[],[]]
         result = []
         month_list = []
+
         if self.label_year_2.text() == "2013":
             for i in range(0, len(self.grape_date_arr)):
                 if "201301" in self.grape_date_arr[i]:
@@ -207,15 +184,37 @@ class WindowClass(QWidget) :
                     sumprice = list(map(int, temp[i]))
                     result.append(int((sum(sumprice)/len(sumprice))))
                     month_list.append(i+1)
-        #
-        # elif self.label_year_2.text() == "2014":
-        #     print('성공')
-        # else
-
-
-
-        # self.grape_date_arr
-        # self.grape_price_arr
+        elif self.label_year_2.text() == "2014":
+            for i in range(0, len(self.grape_date_arr)):
+                if "201401" in self.grape_date_arr[i]:
+                    temp[0].append(self.grape_price_arr[i])
+                elif "201402" in self.grape_date_arr[i]:
+                    temp[1].append(self.grape_price_arr[i])
+                elif "201403" in self.grape_date_arr[i]:
+                    temp[2].append(self.grape_price_arr[i])
+                elif "201404" in self.grape_date_arr[i]:
+                    temp[3].append(self.grape_price_arr[i])
+                elif "201405" in self.grape_date_arr[i]:
+                    temp[4].append(self.grape_price_arr[i])
+                elif "201406" in self.grape_date_arr[i]:
+                    temp[5].append(self.grape_price_arr[i])
+                elif "201407" in self.grape_date_arr[i]:
+                    temp[6].append(self.grape_price_arr[i])
+                elif "201408" in self.grape_date_arr[i]:
+                    temp[7].append(self.grape_price_arr[i])
+                elif "201409" in self.grape_date_arr[i]:
+                    temp[8].append(self.grape_price_arr[i])
+                elif "201410" in self.grape_date_arr[i]:
+                    temp[9].append(self.grape_price_arr[i])
+                elif "201411" in self.grape_date_arr[i]:
+                    temp[10].append(self.grape_price_arr[i])
+                elif "201412" in self.grape_date_arr[i]:
+                    temp[11].append(self.grape_price_arr[i])
+            for i in range(0, 12):
+                if temp[i]:
+                    sumprice = list(map(int, temp[i]))
+                    result.append(int((sum(sumprice)/len(sumprice))))
+                    month_list.append(i+1)
         self.fig = plt.Figure()
         self.canvas = FigureCanvas(self.fig)
         self.verticalLayout.addWidget(self.canvas)
@@ -227,13 +226,10 @@ class WindowClass(QWidget) :
         ax.plot(x, y)
         ax.set_xlabel("month")
         ax.set_ylabel("price")
-
-        # ax.set_title("my sin graph")
-        # ax.legend()
         self.canvas.draw()
         self.stackedWidget.setCurrentIndex(3)
 
-    def go_home(self):
+    def go_home(self): # 리스트를 초기화 시키면서 메인화면으로 돌아가기위한 함수
         self.canvas.close()
         self.totalArray = []
         self.productArray = []
@@ -243,20 +239,8 @@ class WindowClass(QWidget) :
         self.stackedWidget.setCurrentIndex(0)
 
 
-
-
-
-
-
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
-    #QApplication : 프로그램 실행 클래스
-
     myWindow = WindowClass()
-    # WindowClass의 인스턴스 생성
-
     myWindow.show()
-    # 프로그램 화면을 보여주는 코드
-
     app.exec_()
-    # 프로그램을 이벤트루프로 진입시키는 코드 (프로그램 작동)
